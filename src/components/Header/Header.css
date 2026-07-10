@@ -1,0 +1,87 @@
+
+.container-fluid{
+    --bs-gutter-x: 0;
+    .header {
+    padding: 20px;
+    max-width: 100%;
+    background: #1E255E;
+    color: blue;
+    display: flex;
+    gap: 5%;
+    align-items: center;
+    justify-content: space-between;
+    border: 10px rgb(255, 0, 157);
+
+    .logo {
+        color: #ffffff;
+        float: left;
+        display: flex;
+        font-size: 35px;
+        align-items: center;
+        gap: 10px;
+    }
+    .logo-title{
+        display: flex;
+        
+    }
+
+    .todo {
+        color: #ffffff;
+        /* gap: 10px; */
+    }
+
+    .list {
+        color: #4F46E5;
+    }
+
+    .nav-items {
+        display: flex;
+        align-items: center;
+        /* Vertically aligns the icon and text */
+        gap: 10px;
+
+        a {
+            text-decoration: none;
+            color: #ffffff;
+        }
+
+        .menu {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .menu-icon {
+            font-size: 35px;
+            color: white;
+        }
+
+        .menu a {
+            margin: 0;
+            color: white;
+        }
+
+    }
+
+    .user {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .user-icon {
+        color: #6b7280;
+        background: white;
+        border-radius: 50%;
+        padding: 3px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .user span {
+        margin: 0;
+        color: white;
+    }
+}
+}
