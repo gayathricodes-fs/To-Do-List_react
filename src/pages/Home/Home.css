@@ -30,59 +30,89 @@
 .table-section {
     margin: 30px 160px 0 160px;
 
-    .search-container {
+    .add-task-container {
         width: 100%;
         background: white;
-        padding: 20px;
+        padding: 20px 20px 0 20px;
         box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        border-radius: 6px;
 
     }
-.row{
-    margin-right:0;
-}
+
+    .row {
+        margin-right: 0;
+    }
+
     .task_input {
         position: relative;
 
         .form-control {
-            font-size: 16px;
+            font-size: 15px;
         }
 
     }
 
     .dropdown {
-        .dropdown-toggle {
-            font-size: 16px;
-            border: var(--bs-border-width) solid var(--bs-border-color);
-            font-weight: 400;
-            line-height: 1.5;
-            color: var(--bs-body-color);
-            display: flex;
-            gap: 30px;
-            align-items: center;
-            appearance: none;
-            font-weight: 400;
-            line-height: 1.5;
-            transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-            justify-content: space-between;
-        }
-        
+        font-size: 16px;
+        font-weight: 500;
 
-        .dropdown-toggle::after {
-            display: none;
-        }
-
-        .dropdown-menu {
-            font-size: 16px;
+        select,
+        option {
+            font-size: 15px;
+            font-size: 15px;
         }
 
     }
 
     .add-btn {
+        width: 100%;
         font-size: 14px;
-        display: flex;
-        gap: 20px;
         font-weight: 500;
+        display: flex;
+        justify-content: center;
         align-items: center;
+        gap: 8px;
     }
-   
+
+    .date-input {
+        position: relative;
+
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            display: none;
+        }
+    }
+
+    .calendar-icon {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #6B7280;
+        font-size: 18px;
+        pointer-events: auto;
+        cursor: pointer;
+    }
+
+    .date-input input {
+        padding-left: 40px;
+        font-size: 15px;
+        font-weight: 400;
+        color: #667085;
+
+    }
+
+    .due-date {
+        font-size: 14px;
+        font-weight: 400;
+        color: #667085;
+    }
+
+    .error-msg {
+        display: block;
+        min-height: 18px;
+        font-size: 12px;
+        margin-top: 4px;
+        text-align: start;
+    }
+
 }

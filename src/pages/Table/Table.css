@@ -1,0 +1,37 @@
+  .table {
+        background: rgb(199, 10, 10);
+        border-radius: 6px;
+        overflow: hidden;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2) !important;
+    }
+
+    .table thead th {
+        font-size: 15px;
+        font-weight: 600;
+        color: #475467;
+    }
+
+    .table tbody td:not(.due-date) {
+        font-size: 16px;
+        font-weight: 500;
+        color: #101828;
+    }
+
+    .table tr {
+        height: 72px;
+    }
+
+    .table td {
+        vertical-align: middle;
+    }
+
+    .badge {
+        font-size: 14px;
+        font-weight: 500;
+        min-width: 85px;
+    }
+
+
+    .table tbody tr:hover {
+        background: #fafafa;
+    }

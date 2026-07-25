@@ -52,6 +52,7 @@
 
 body {
   margin: 0;
+  font-family: 'Inter', sans-serif !important;
 }
 
 #root {
@@ -62,6 +63,7 @@ body {
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
+   background: aliceblue;
 }
 
 h1,

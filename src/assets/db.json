@@ -1,0 +1,26 @@
+{
+  "tasks": [
+    {
+      "id": "rwT5ZImvtFk",
+      "title": "Learn Reactjs ",
+      "priority": "Medium",
+      "dueDate": "Jul 31, 2026",
+      "completed": false
+    },
+    {
+      "id": "n6sKqWw7hA4",
+      "title": "Learn Nodejs",
+      "priority": "Medium",
+      "dueDate": "Jul 23, 2026",
+      "completed": false
+    },
+    {
+      "id": "GlcW6HzmjQs",
+      "title": "Learn Angular",
+      "priority": "Low",
+      "dueDate": "Jul 26, 2026",
+      "completed": false
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
