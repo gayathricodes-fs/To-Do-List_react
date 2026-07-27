@@ -1,0 +1,36 @@
+.filter-section {
+    margin: 30px 160px 0 160px;
+
+    .filter-task-container {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+
+
+        .filterTasks {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+
+            .filter-btn {
+                width: auto;
+                font-size: 14px;
+                font-weight: 500;
+                align-items: center;
+                background: white;
+                box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+                border-radius: 6px;
+                border: none;
+
+            }
+            :active{
+                background: #0d6efd;
+                color: white;
+                
+            }
+        }
+        .form-control {
+            font-size: 15px;
+        }
+    }
+}

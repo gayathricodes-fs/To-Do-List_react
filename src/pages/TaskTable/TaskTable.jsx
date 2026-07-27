@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
-import './Table.css';
+import './TaskTable.css';
 import {
     FiCheckSquare, FiCalendar, FiSquare, FiEdit2, FiTrash2
 } from "react-icons/fi";
-export function Table({ tasks, setDueDate, setTitle, setPriority, setCompleted, setTasks,editTask }) {
+export function TaskTable({ tasks, setDueDate, setTitle, setPriority, setCompleted, setTasks,editTasks,toggleTask }) {
 
 
     //Delete Tasks

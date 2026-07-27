@@ -1,13 +1,6 @@
 {
   "tasks": [
     {
-      "id": "rwT5ZImvtFk",
-      "title": "Learn Reactjs ",
-      "priority": "Medium",
-      "dueDate": "Jul 31, 2026",
-      "completed": false
-    },
-    {
       "id": "n6sKqWw7hA4",
       "title": "Learn Nodejs",
       "priority": "Medium",
@@ -19,6 +12,13 @@
       "title": "Learn Angular",
       "priority": "Low",
       "dueDate": "Jul 26, 2026",
+      "completed": false
+    },
+    {
+      "id": "SWCX5YNr8Cg",
+      "title": "Learn Next",
+      "priority": "High",
+      "dueDate": "Jul 31, 2026",
       "completed": false
     }
   ],
