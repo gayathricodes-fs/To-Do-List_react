@@ -3,34 +3,22 @@ import './TaskTable.css';
 import {
     FiCheckSquare, FiCalendar, FiSquare, FiEdit2, FiTrash2
 } from "react-icons/fi";
-export function TaskTable({ tasks, setDueDate, setTitle, setPriority, setCompleted, setTasks,editTasks,toggleTask }) {
+export function TaskTable({ filteredData, setDueDate, setTitle, setPriority, setCompleted, setTasks,editTasks,deleteTask,toggleTask }) {
 
 
     //Delete Tasks
-    const deleteTask = async (id) => {
-        try {
-            await fetch(`http://localhost:3001/tasks/${id}`, {
-                method: "DELETE"
-            }
-            )
-            setTasks((previousTasks) => previousTasks.filter((tasks) => tasks.id !== id));
-            setTitle("");
-            setDueDate("");
-            setPriority("Select")
-        } catch (error) {
-            console.log(error)
-        }
-    }
+    
 
     return (
         <>
             <section className='table-section'>
-                {tasks.length > 0 ?
-
+                {filteredData.length > 0 ?
                     (<table className="table align-middle shadow-sm" >
 
                         <tbody>
-                            {tasks.map((task) => (
+                            {filteredData.map((task) => {
+                               if (!task) return null;
+                               return (
                                 <tr key={task.id}>
 
                                     {/* Checkbox */}
@@ -99,7 +87,7 @@ export function TaskTable({ tasks, setDueDate, setTitle, setPriority, setComplet
                                             size={20}
                                             className="me-4"
                                             style={{ cursor: "pointer" }}
-                                            onClick={() => editTask(task.id)}
+                                            onClick={() => editTasks(task.id)}
                                         />
 
                                         <FiTrash2
@@ -112,7 +100,9 @@ export function TaskTable({ tasks, setDueDate, setTitle, setPriority, setComplet
                                     </td>
 
                                 </tr>
-                            ))}
+                               )
+                                
+})}
                         </tbody>
                     </table>) :
                     <div>No Records Found</div>

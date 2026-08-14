@@ -25,7 +25,9 @@ function Home() {
     const [dueDate, setDueDate] = useState("");
     const dateRef = useRef();
     const today = new Date().toISOString().split("T")[0]
-
+    const [totalTasks, setTotalTasks] = useState(0);
+    const [completedTasks, setCompletedTasks] = useState(0);
+    const [remainingTasks, setRemainingTasks] = useState(0);
     //Check form validity
     const [error, setError] = useState({
         title: "",
@@ -34,9 +36,52 @@ function Home() {
     });
 
     const [loading, setLoading] = useState(true);
+    const [searchTerm, setSearchTerm] = useState("");
+    const [activeFilter, setActiveFilter] = useState("all")
+
+    //Filter task
+   const  setActiveFilterTask = async (param) => {
+    console.log(param);
+     setActiveFilter(activeFilter)
+        if (param === 'all') {
+            fetchTask();
+        }
+
+        if (param === 'active') {
+            try {
+                const response = await fetch("http://localhost:3001/tasks")
+                const data = await response.json();
+                const activeTasks = data.filter((task) => !task.completed);
+                setTasks(activeTasks);
+            } catch (error) {
+                console.error(error);
+                setTasks([]); // Prevent crashes
+            }
+        }
+
+        if (param === 'completed') {
+            try {
+                const response = await fetch("http://localhost:3001/tasks")
+                const data = await response.json();
+                const activeTasks = data.filter((task) => task.completed);
+                setTasks(activeTasks);
+            } catch (error) {
+                console.error(error);
+                setTasks([]); // Prevent crashes
+            }
+        }
+       
+    }
+
+
+    //search Tasks
+    const filteredData =
+        tasks.filter((t) =>
+            t.title.toLowerCase().includes(searchTerm.toLowerCase()))
+
+    //Check form validity
     const validateField = (name, value) => {
         let message = "";
-
         if (name === "title")
             if (value.trim() === "") {
                 message = "Task title is required";
@@ -44,6 +89,7 @@ function Home() {
             else if (value.trim().length < 5) {
                 message = "Task title should have minimum 5 characters";
             }
+
 
         if (name === "priority" && value === "") {
             message = "Priority is required";
@@ -73,6 +119,13 @@ function Home() {
             // }
 
             const data = await response.json();
+            const total = data.length;
+            const completedLength = data.filter((task) => task.completed).length;
+            const remainingLength = total - completedLength;
+            setTotalTasks(total);
+            setCompletedTasks(completedLength);
+            setRemainingTasks(remainingLength)
+
             setTasks(data);
         } catch (error) {
             console.error(error);
@@ -81,14 +134,33 @@ function Home() {
     }
 
     //Toggle Function
-    const toggleTask = (d) =>
-        setTasks(
-            tasks.map((task) =>
-                (task.id) === d ?
-                    { ...task, completed: !task.completed }
-                    : task
-            )
+    const toggleTask = async (d) => {
+        const task = tasks.find((t) => d === t.id)
+        if (!task) return
+
+        const updatedTask = {
+            ...task,
+            completed: !task.completed
+        }
+
+        const response = await fetch(`http://localhost:3001/tasks/${d}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ completed: updatedTask.completed }),
+        }
+
         )
+        setTasks(prevTasks =>
+            prevTasks.map(t =>
+                t.id === d ? updatedTask : t
+            )
+        );
+        fetchTask()
+    }
+
+
 
     //Add Tasks 
     const addTask = async () => {
@@ -115,6 +187,8 @@ function Home() {
 
         try {
             if (!editId) {
+                console.log("before", tasks);
+
                 const response = await fetch("http://localhost:3001/tasks", {
                     method: "POST",
                     headers: {
@@ -124,10 +198,12 @@ function Home() {
                 }
                 )
                 const data = await response.json()
-                setTasks((previousTasks) => [...previousTasks, data])
+
+                setTasks((previousTasks) => [data, ...previousTasks])
                 setTitle("");
                 setDueDate("");
                 setPriority("Select")
+                fetchTask()
             }
             else {
                 const response = await fetch(`http://localhost:3001/tasks/${editId}`, {
@@ -144,9 +220,6 @@ function Home() {
                 setDueDate("");
                 setPriority("Select")
             }
-
-
-
         } catch (error) {
             console.log(error)
         }
@@ -156,7 +229,8 @@ function Home() {
 
     //Edit tasks 
 
-    const editTask = async (id) => {
+    const editTasks = async (id) => {
+
         try {
             const response = await fetch(`http://localhost:3001/tasks/${id}`)
             if (!response.ok) {
@@ -170,12 +244,60 @@ function Home() {
             const formattedDate = new Date(data.dueDate).toLocaleDateString("en-CA");
             setDueDate(formattedDate)
             setEditId(data.id)
+            validateField("title", data.title);
+            validateField("dueDate", data.dueDate);
+            validateField("priority", data.priority);
+
 
         } catch (error) {
             console.error(error);
             setTasks([]); // Prevent crashes
         }
     }
+
+    // delete tasks
+    const deleteTask = async (id) => {
+        try {
+            await fetch(`http://localhost:3001/tasks/${id}`, {
+                method: "DELETE"
+            }
+            )
+            setTasks((previousTasks) => previousTasks.filter((tasks) => tasks.id !== id));
+            setTitle("");
+            setDueDate("");
+            setPriority("Select")
+            fetchTask()
+            setEditId(null);
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const clearCompleted = async () => {
+        const completedTasks = tasks.filter((t) => t.completed)
+        await Promise.all(
+            completedTasks.map((t) => {
+                console.log(t);
+
+                fetch(`http://localhost:3001/tasks/${t.id}`, {
+                    method: "DELETE"
+                })
+            }
+            ));
+        // update Table using setTasks
+        setTasks((previousTasks) => previousTasks.filter((tasks) => !tasks.completed));
+
+        const total = tasks.filter((t) => !t.completed).length
+        const completedLength = 0
+        const remainingLength = total
+        setTotalTasks(total);
+        setCompletedTasks(completedLength);
+        setRemainingTasks(remainingLength)
+
+
+    }
+
+
     return (
         <>
 
@@ -197,19 +319,31 @@ function Home() {
                 validateField={validateField}
 
             />
-            <FilterTask></FilterTask>
+            <FilterTask
+                setActiveFilterTask={setActiveFilterTask}
+                activeFilter={activeFilter}
+                setSearchTerm={setSearchTerm}
+                searchTerm={searchTerm}
+                setActiveFilter={setActiveFilter}>
+                
+                </FilterTask>
             <TaskTable
-                tasks={tasks}
+                filteredData={filteredData}
                 setTitle={setTitle}
                 setPriority={setPriority}
                 setDueDate={setDueDate}
                 setCompleted={setCompleted}
                 setTasks={setTasks}
-                editTask={editTask}
+                editTasks={editTasks}
                 toggleTask={toggleTask}
+                deleteTask={deleteTask}
+
             />
-            <TaskSummary></TaskSummary>
-            
+            <TaskSummary totalTasks={totalTasks}
+                completedTasks={completedTasks}
+                remainingTasks={remainingTasks}
+                clearCompleted={clearCompleted}></TaskSummary>
+
         </>
     )
 }

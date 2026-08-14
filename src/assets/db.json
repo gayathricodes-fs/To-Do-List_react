@@ -1,25 +1,25 @@
 {
   "tasks": [
     {
-      "id": "n6sKqWw7hA4",
-      "title": "Learn Nodejs",
-      "priority": "Medium",
-      "dueDate": "Jul 23, 2026",
-      "completed": false
-    },
-    {
-      "id": "GlcW6HzmjQs",
-      "title": "Learn Angular",
-      "priority": "Low",
-      "dueDate": "Jul 26, 2026",
-      "completed": false
-    },
-    {
-      "id": "SWCX5YNr8Cg",
-      "title": "Learn Next",
+      "id": "Ymu2Nbjd4jo",
+      "title": "learn nodejs",
       "priority": "High",
-      "dueDate": "Jul 31, 2026",
-      "completed": false
+      "dueDate": "Aug 11, 2026",
+      "completed": true
+    }
+  ],
+  "users": [
+    {
+      "email": "gayathri@gmail.com",
+      "password": "advik",
+      "name": "Gayathri",
+      "id": "63ftqX7gr-w"
+    },
+    {
+      "name": "advik",
+      "email": "advik@gmail.com",
+      "password": "advik",
+      "id": "Ip5tYXU8fgw"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

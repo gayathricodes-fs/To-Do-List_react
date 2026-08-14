@@ -1,16 +1,25 @@
 import './Header.css'
-import { FiCheckSquare, FiHome, FiList, FiBarChart2, FiInfo, FiUser } from "react-icons/fi";
+import { FiCheckSquare, FiHome, FiList, FiBarChart2, FiInfo, FiUser, FiSettings, FiLogOut, FiChevronDown } from "react-icons/fi";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 function Header() {
+
+    const navigate = useNavigate();
+    const [showDropdown, setShowDropdown] = useState(false);
+
+    const user = localStorage.getItem("user");
+    const userDetails =JSON.parse(atob(user))
+    const handleLogout = () => {
+        localStorage.removeItem("user");
+        navigate("/login");
+    };
     return (
         <>
             <div className='container-fluid'>
                 <header className="header">
                     <div className="logo">
-                        <FiCheckSquare className='icon' color="white" />
-                        <div className='logo-title'>
-                            <span className='todo'>Todo</span>
-                            <span className='list'>List</span>
-                        </div>
+                        <img src="/logo-update-removebg-preview.png" alt="" />
+                        
                     </div>
 
                     <nav className='nav-items'>
@@ -20,7 +29,57 @@ function Header() {
                         <div className='menu'><FiInfo className="menu-icon" size={20} /> <a href="#">About</a></div>
                     </nav>
 
-                    <div className='user'><FiUser className="user-icon" size={24} color="grey" /><span>Hello, User!</span></div>
+                    <div className="user-container">
+
+                        <button
+                            className="user-button"
+                            onClick={() => setShowDropdown(!showDropdown)}
+                        >
+                            <div className="user-icon">
+                                <FiUser />
+                            </div>
+{}
+                            <span className="user-name">
+                               Hello! {userDetails?.name || "User"}
+                            </span>
+
+                            <FiChevronDown
+                                className={showDropdown ? "arrow rotate" : "arrow"}
+                            />
+                        </button>
+
+                        {showDropdown && (
+                            <div className="user-dropdown">
+
+                                <button
+                                    className="dropdown-item"
+                                    onClick={() => navigate("/profile")}
+                                >
+                                    <FiUser />
+                                    <span>My Profile</span>
+                                </button>
+
+                                <button
+                                    className="dropdown-item"
+                                    onClick={() => navigate("/settings")}
+                                >
+                                    <FiSettings />
+                                    <span>Settings</span>
+                                </button>
+
+                                <div className="dropdown-divider"></div>
+
+                                <button
+                                    className="dropdown-item logout"
+                                    onClick={handleLogout}
+                                >
+                                    <FiLogOut />
+                                    <span>Logout</span>
+                                </button>
+
+                            </div>
+                        )}
+                    </div>
                 </header>
                 {/* <hr/> */}
             </div>

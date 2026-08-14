@@ -1,3 +1,7 @@
+  
+  .table-section{
+    margin: 30px 160px 0 160px;
+ 
   .table {
         background: rgb(199, 10, 10);
         border-radius: 6px;
@@ -11,7 +15,7 @@
         color: #475467;
     }
 
-    .table tbody td:not(.due-date) {
+    .table tbody td {
         font-size: 14px;
         font-weight: 500;
         color: #101828;
@@ -35,3 +39,4 @@
     .table tbody tr:hover {
         background: #fafafa;
     }
+ }

@@ -5,8 +5,8 @@ import {
     FiSquare, FiEdit2, FiTrash2
 } from "react-icons/fi";
 
-function AddTask({ title,setTitle,priority,setPriority,dueDate,
-    setDueDate,addTask,error,setError,prioritiesList,dateRef,today,editId, setEditId,validateField}) {
+function AddTask({ title, setTitle, priority, setPriority, dueDate,
+    setDueDate, addTask, error, setError, prioritiesList, dateRef, today, editId, setEditId, validateField }) {
 
     return (
         <>
@@ -16,12 +16,15 @@ function AddTask({ title,setTitle,priority,setPriority,dueDate,
                     <p>Stay organized. Get things done.</p>
                 </div>
             </section>
-            <section className="table-section ">
+            <section className="add-section ">
                 <div className='add-task-container '>
-                    <form className="d-flex row g-2 align-items-start">
+                    <form className="task-form">
 
-                        <div className='task_input col-lg-6'>
-
+                        <div className='task_input task-name-field'>
+                            <div className="mandate">
+                                <span className='asterisk'>*</span>
+                                <label>Task name</label>
+                            </div>
                             <input
                                 className="form-control "
                                 value={title}
@@ -39,9 +42,13 @@ function AddTask({ title,setTitle,priority,setPriority,dueDate,
 
                         </div>
 
-                        <div className="dropdown col-lg-2">
+                        <div className="task_input priority-field">
+                            <div className="mandate">
+                                <span className='asterisk'>*</span>
+                                <label>Priority</label>
+                            </div>
                             <select
-                                className="form-select"
+                                className="form-control form-select"
                                 value={priority}
                                 onChange={(e) => {
                                     setPriority(e.target.value)
@@ -64,8 +71,13 @@ function AddTask({ title,setTitle,priority,setPriority,dueDate,
 
                         </div>
 
-                        <div className='col-lg-2'>
+                        <div className='task_input date-field'>
+                           <div className="mandate">
+                                <span className='asterisk'>*</span>
+                                <label>Due date</label>
+                            </div>
                             <div className='date-input'>
+                                 
                                 <FiCalendar className="calendar-icon" onClick={() => dateRef.current.showPicker()} />
 
                                 <input
@@ -82,24 +94,24 @@ function AddTask({ title,setTitle,priority,setPriority,dueDate,
                                     }
                                 />
                             </div>
-                            <div className='error-msg'>
-                                <small className="text-danger">
-                                    {error.dueDate || "\u00A0"}
-                                </small>
-                            </div>
+
+                            <small className="text-danger error-msg">
+                                {error.dueDate || "\u00A0"}
+                            </small>
+
                         </div>
 
 
 
-                        <div className='col-lg-2'>
+                        <div className='button-field'>
                             <button className="btn btn-primary add-btn w-100 " type="button" onClick={() => addTask()} >
-                               {
-                               !editId ?
-                                <div>
-                                <FiPlusCircle className="add-icon" size={20} color="white" /> <span >Add Task</span> </div> :
-                                <div> <FiPlusCircle className="add-icon" size={20} color="white" /> <span >Update Task</span> </div>
+                                {
+                                    !editId ?
+                                        <div>
+                                            <FiPlusCircle className="add-icon" size={20} color="white" /> <span >Add Task</span> </div> :
+                                        <div> <FiPlusCircle className="add-icon" size={20} color="white" /> <span >Update Task</span> </div>
 
-                                } 
+                                }
                             </button>
                         </div>
 
@@ -107,7 +119,7 @@ function AddTask({ title,setTitle,priority,setPriority,dueDate,
                 </div>
             </section>
 
-            
+
         </>
     )
 }

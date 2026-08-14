@@ -1,8 +1,11 @@
+.container-fluid {
+  --bs-gutter-x: 0;
 
-.container-fluid{
-    --bs-gutter-x: 0;
-    .header {
-    padding: 20px;
+  .header {
+    height: 100px;
+    position: relative;
+    display: flex;
+    align-items: center;
     max-width: 100%;
     background: #1E255E;
     color: blue;
@@ -11,59 +14,70 @@
     align-items: center;
     justify-content: space-between;
     border: 10px rgb(255, 0, 157);
+    border-bottom: 3px solid #4c46ff;
 
     .logo {
-        color: #ffffff;
-        float: left;
-        display: flex;
-        font-size: 35px;
-        align-items: center;
-        gap: 10px;
+      color: #ffffff;
+      float: left;
+      display: flex;
+      font-size: 35px;
+      align-items: center;
+      gap: 10px;
+
+      img {
+        width: 150px;
+        height: 100px;
+        object-fit: contain;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+      }
     }
-    .logo-title{
-        display: flex;
-        
+
+    .logo-title {
+      display: flex;
+
     }
 
     .todo {
-        color: #ffffff;
-        /* gap: 10px; */
+      color: #ffffff;
+      /* gap: 10px; */
     }
 
     .list {
-        color: #4F46E5;
+      color: #4F46E5;
     }
 
     .nav-items {
+      display: flex;
+      align-items: center;
+      /* Vertically aligns the icon and text */
+      gap: 10px;
+
+      a {
+        text-decoration: none;
+        color: #ffffff;
+      }
+
+      .menu {
         display: flex;
         align-items: center;
-        /* Vertically aligns the icon and text */
         gap: 10px;
+      }
 
-        a {
-            text-decoration: none;
-            color: #ffffff;
-        }
+      .menu-icon {
+        font-size: 35px;
+        color: white;
+      }
 
-        .menu {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .menu-icon {
-            font-size: 35px;
-            color: white;
-        }
-
-        .menu a {
-            margin: 0;
-            color: white;
-        }
+      .menu a {
+        margin: 0;
+        color: white;
+      }
 
     }
 
-    .user {
+    /* .user {
         display: flex;
         align-items: center;
         gap: 10px;
@@ -77,11 +91,121 @@
         display: flex;
         align-items: center;
         justify-content: center;
-    }
+    } */
 
-    .user span {
+    /* .user span {
         margin: 0;
         color: white;
+    } */
+    .user-container {
+      position: relative;
     }
-}
+
+    .user-button {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border: none;
+      background: transparent;
+      color: white;
+      cursor: pointer;
+      padding: 5px 8px;
+    }
+
+    .user-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #8b5cf6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+
+    .user-name {
+      text-transform: capitalize;
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    .arrow {
+      font-size: 18px;
+      transition: transform 0.2s ease;
+    }
+
+    .rotate {
+      transform: rotate(180deg);
+    }
+
+    /* Dropdown */
+
+    .user-dropdown {
+      position: absolute;
+
+      top: 55px;
+      right: 0;
+
+      width: 190px;
+
+      background: white;
+
+      border-radius: 8px;
+
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+
+      overflow: hidden;
+
+      z-index: 1000;
+    }
+
+    /* Dropdown buttons */
+
+    .dropdown-item {
+      width: 100%;
+
+      display: flex;
+      align-items: center;
+
+      gap: 12px;
+
+      padding: 13px 16px;
+
+      border: none;
+      background: white;
+
+      color: #333;
+
+      font-size: 15px;
+
+      cursor: pointer;
+
+      text-align: left;
+    }
+
+    .dropdown-item:hover {
+      background: #f4f4f5;
+    }
+
+    .dropdown-item svg {
+      font-size: 18px;
+    }
+
+    /* Divider */
+
+    .dropdown-divider {
+      height: 1px;
+      background: #e5e7eb;
+    }
+
+    /* Logout */
+
+    .dropdown-item.logout {
+      color: #dc2626;
+    }
+
+    .dropdown-item.logout:hover {
+      background: #fef2f2;
+    }
+  }
 }

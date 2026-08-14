@@ -8,23 +8,104 @@
         box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
         border-radius: 6px;
         display: flex;
-        
-        .summary-icons{
+
+        .summary-icons {
+            width: 100%;
             display: flex;
-            gap: 8px;
             align-items: center;
-           .icon-group{
-            display: flex;
             vertical-align: middle;
-            .icon{
-                border: 1px solid black;
-                border-radius: 3px;
+            justify-content: space-between;
+
+            .flex {
+                display: flex;
+                gap: 100px;
+
+                .icon-group {
+                    display: flex;
+                    align-items: center;
+                    gap: 15px;
+                }
+
+                .circle {
+                    width: 54px;
+                    height: 54px;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+                
+
+                /* Total */
+                .circle.total {
+                    background: #EEF2FF;
+                    border: 2px solid #C7D2FE;
+                    color: #4F46E5;
+                    border-radius: 20px;
+                    width: 50px;
+                }
+
+                /* Completed */
+                .circle.completed {
+                    background: #ECFDF5;
+                    border: 2px solid #A7F3D0;
+                    color: #16A34A;
+                   .icon {
+                    background:#22C55E; ;
+                    border: 1px solid #A7F3D0;
+                    border-radius: 50%;
+                    color: white;
+                    }
+                }
+
+                /* Remaining */
+                .circle.remaining {
+                    background: #FFF7ED;
+                    border: 2px solid #FED7AA;
+                    color: #F59E0B;
+
+                    .icon{
+                        background:#F59E0B; 
+                        color: white;
+                        border-radius: 50%;
+                    }
+                }
+
+                .text p {
+                    margin: 0;
+                    font-size: 14px;
+                    color: #6B7280;
+                    font-weight: 500;
+                }
+
+                .text h2 {
+                    margin: 4px 0 0;
+                    font-size: 28px;
+                    font-weight: 700;
+                    color: #1F2937;
+                }
+
             }
-            .text{
-                display: block;
-                font-size: 14px;
+
+            .clear-section {
+                display: flex;
+
+                .clear {
+                    gap: 15px;
+                    color: #EF4444;
+                    border: 1px solid #EF4444;
+                    border-radius: 10px;
+                    background: #FFFFFF;
+                    font-size: 14px;
+                    width: 200px;
+                    align-content: center;
+                    height: 40px;
+                    display: flex;
+                    align-items: center;
+                    padding: 20px;
+                }
             }
-           }
         }
     }
 }
