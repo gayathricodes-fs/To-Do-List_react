@@ -1,17 +1,12 @@
 
-
 import AddTask from '../AddTask/AddTask.jsx';
 import React, { useEffect, useState, useRef } from "react";
-import {
-    FiCheckSquare, FiHome, FiList, FiBarChart2, FiInfo, FiUser, FiPlusCircle, FiCalendar, FiChevronDown,
-    FiSquare, FiEdit2, FiTrash2
-} from "react-icons/fi";
-import { TaskTable } from '../TaskTable/TaskTable';
-import FilterTask from '../FilterTask/FilterTask.jsx'
-import TaskSummary from '../TaskSummary/TaskSummary.jsx'
 
-function Home() {
-    const [tasks, setTasks] = useState([])
+import { TaskTable } from '../TaskTable/TaskTable.jsx';
+import FilterTask from '../FilterTask/FilterTask.jsx'
+import { useTasks } from '../../context/TaskContext.jsx';
+function Tasks(){
+  const { tasks, setTasks } = useTasks();
     const [title, setTitle] = useState("");
     const [priority, setPriority] = useState("");
     const [completed, setCompleted] = useState(false);
@@ -273,30 +268,7 @@ function Home() {
         }
     }
 
-    const clearCompleted = async () => {
-        const completedTasks = tasks.filter((t) => t.completed)
-        await Promise.all(
-            completedTasks.map((t) => {
-                console.log(t);
-
-                fetch(`http://localhost:3001/tasks/${t.id}`, {
-                    method: "DELETE"
-                })
-            }
-            ));
-        // update Table using setTasks
-        setTasks((previousTasks) => previousTasks.filter((tasks) => !tasks.completed));
-
-        const total = tasks.filter((t) => !t.completed).length
-        const completedLength = 0
-        const remainingLength = total
-        setTotalTasks(total);
-        setCompletedTasks(completedLength);
-        setRemainingTasks(remainingLength)
-
-
-    }
-
+   
 
     return (
         <>
@@ -339,14 +311,8 @@ function Home() {
                 deleteTask={deleteTask}
 
             />
-            <TaskSummary totalTasks={totalTasks}
-                completedTasks={completedTasks}
-                remainingTasks={remainingTasks}
-                clearCompleted={clearCompleted}></TaskSummary>
 
         </>
     )
 }
-
-
-export default Home
+export default Tasks

@@ -105,7 +105,7 @@ function Login() {
       // Store logged-in user
       // localStorage.setItem("user", btoa(JSON.stringify(users[0])));
 
-      // Navigate to Home
+      // Navigate to Dashboard
       navigate("/home");
     } catch (error) {
       console.error(error);

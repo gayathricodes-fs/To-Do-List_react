@@ -1,10 +1,17 @@
-import './Header.css'
-import { FiCheckSquare, FiHome, FiList, FiBarChart2, FiInfo, FiUser, FiSettings, FiLogOut, FiChevronDown } from "react-icons/fi";
+import React from "react";
+import {
+  FiSearch,
+  FiBell,
+  FiUser,
+  FiLogOut, FiChevronDown,FiSettings 
+} from "react-icons/fi";
+import "./Header.css";
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-function Header() {
-
-    const navigate = useNavigate();
+import { useLocation } from "react-router-dom";
+const Header = () => {
+  const navigate = useNavigate();
     const [showDropdown, setShowDropdown] = useState(false);
 
     const user = localStorage.getItem("user");
@@ -13,32 +20,44 @@ function Header() {
         localStorage.removeItem("user");
         navigate("/login");
     };
-    return (
-        <>
-            <div className='container-fluid'>
-                <header className="header">
-                    <div className="logo">
-                        <img src="/logo-update-removebg-preview.png" alt="" />
-                        
-                    </div>
+    const location = useLocation();
+    const title = location.pathname
+  .replace("/", "")
+  .replace("-", " ")
+  .replace(/\b\w/g, char => char.toUpperCase());
+  return (
+  
+    <header className="header">
 
-                    <nav className='nav-items'>
-                        <div className='menu'><FiHome className="menu-icon" size={20} color="white" /><a href="#" > Home</a></div>
-                        <div className='menu'><FiList className="menu-icon" size={20} /> <a href="#">Tasks</a></div>
-                        <div className='menu'><FiBarChart2 className="menu-icon" size={20} /> <a href="#">Stats</a></div>
-                        <div className='menu'><FiInfo className="menu-icon" size={20} /> <a href="#">About</a></div>
-                    </nav>
+      <h1>{title}</h1>
 
-                    <div className="user-container">
+      <div className="header-right">
+
+        {/* Search */}
+        <div className="search-box">
+          <FiSearch />
+          <input
+            type="text"
+            placeholder="Search tasks..."
+          />
+        </div>
+
+        {/* Notification */}
+        <button className="header-icon">
+          <FiBell />
+        </button>
+
+        {/* Profile */}
+           <div className="user-container">
 
                         <button
                             className="user-button"
                             onClick={() => setShowDropdown(!showDropdown)}
                         >
                             <div className="user-icon">
-                                <FiUser />
+                                <FiUser color="white"/>
                             </div>
-{}
+
                             <span className="user-name">
                                Hello! {userDetails?.name || "User"}
                             </span>
@@ -80,11 +99,11 @@ function Header() {
                             </div>
                         )}
                     </div>
-                </header>
-                {/* <hr/> */}
-            </div>
-        </>
-    )
-}
+
+      </div>
+
+    </header>
+  );
+};
 
 export default Header;

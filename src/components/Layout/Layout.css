@@ -1,0 +1,15 @@
+.app-layout {
+  min-height: 100vh;
+  background: #f8f9fc;
+}
+
+/* Main area beside sidebar */
+.main-area {
+  margin-left: 250px;
+  min-height: 100vh;
+}
+
+/* Page content */
+.page-content {
+  padding: 25px 30px;
+}
