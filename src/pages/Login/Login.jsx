@@ -95,7 +95,7 @@ function Login() {
       
 
       // Login successful
-     localStorage.setItem("user", (existingUser))
+     localStorage.setItem("user", JSON.stringify(existingUser))
       
 
 
