@@ -1,6 +1,6 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import SideNav from "../Sidenav/Sidenav";
+import Sidenav from "../Sidenav/Sidenav";
 import Header from "../Header/Header";
 import "./Layout.css";
 
@@ -9,7 +9,7 @@ const Layout = () => {
     <div className="app-layout">
 
       {/* Side Navigation */}
-      <SideNav />
+      <Sidenav />
 
       {/* Main Area */}
       <div className="main-area">

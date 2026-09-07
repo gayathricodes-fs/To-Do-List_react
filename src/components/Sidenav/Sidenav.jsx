@@ -7,7 +7,7 @@ import {
   FiUser,
   FiChevronDown
 } from "react-icons/fi";
-import "./SideNav.css";
+import "../Sidenav/Sidenav";
 import { NavLink } from "react-router-dom";
 const SideNav = () => {
  const user = localStorage.getItem("user");
