@@ -14,10 +14,8 @@ import Tasks from "./pages/Tasks/Tasks";
 
 function App() {
   return (
-   <BrowserRouter>
-
+    <BrowserRouter>
       <TaskProvider>
-
         <Routes>
 
           {/* Pages without Layout */}
@@ -32,12 +30,14 @@ function App() {
             element={<Register />}
           />
 
-
           {/* Pages with Layout */}
 
           <Route element={<Layout />}>
 
-            <Route index element={<Dashboard />} />
+            <Route
+              path="/dashboard"
+              element={<Dashboard />}
+            />
 
             <Route
               path="/tasks"
@@ -45,11 +45,16 @@ function App() {
             />
 
           </Route>
-<Route path="*" element={<Navigate to="/" replace />} />
+
+          {/* Unknown routes */}
+
+          <Route
+            path="*"
+            element={<Navigate to="/" replace />}
+          />
+
         </Routes>
-
       </TaskProvider>
-
     </BrowserRouter>
   );
 }
