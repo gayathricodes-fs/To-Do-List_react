@@ -95,10 +95,8 @@ function Login() {
       
 
       // Login successful
-      localStorage.setItem(
-        "user",
-        btoa(JSON.stringify(existingUser))
-      );
+     localStorage.setItem("user", (existingUser))
+      
 
 
 

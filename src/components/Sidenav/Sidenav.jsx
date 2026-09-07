@@ -11,7 +11,10 @@ import "../Sidenav/Sidenav";
 import { NavLink } from "react-router-dom";
 const SideNav = () => {
  const user = localStorage.getItem("user");
-    const userDetails =JSON.parse(atob(user))
+
+const userDetails = user ? JSON.parse(user) : null;
+
+
  const menuItems = [
   { id: 1, label: "Dashboard", icon: <FiHome />, path: "/dashboard" },
   { id: 2, label: "Tasks", icon: <FiList />, path: "/tasks" },

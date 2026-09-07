@@ -15,11 +15,13 @@ const Header = () => {
     const [showDropdown, setShowDropdown] = useState(false);
 
     const user = localStorage.getItem("user");
-    const userDetails =JSON.parse(atob(user))
-    const handleLogout = () => {
-        localStorage.removeItem("user");
-        navigate("/login");
-    };
+
+const userDetails = user ? JSON.parse(user) : null;
+
+const handleLogout = () => {
+  localStorage.removeItem("user");
+  navigate("/login");
+};
     const location = useLocation();
     const title = location.pathname
   .replace("/", "")
