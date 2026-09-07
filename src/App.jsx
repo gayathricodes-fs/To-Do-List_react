@@ -23,7 +23,7 @@ function App() {
           {/* Pages without Layout */}
 
           <Route
-            path="/login"
+            path="/"
             element={<Login />}
           />
 
