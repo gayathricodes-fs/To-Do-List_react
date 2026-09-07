@@ -11,10 +11,6 @@ import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Tasks from "./pages/Tasks/Tasks";
-// import Today from "./pages/Today";
-// import Upcoming from "./pages/Upcoming";
-// import Completed from "./pages/Completed";
-// import Important from "./pages/Important";
 
 function App() {
   return (
@@ -41,10 +37,7 @@ function App() {
 
           <Route element={<Layout />}>
 
-            <Route
-              path="/dashboard"
-              element={<Dashboard />}
-            />
+            <Route index element={<Dashboard />} />
 
             <Route
               path="/tasks"
@@ -52,7 +45,7 @@ function App() {
             />
 
           </Route>
-
+<Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
 
       </TaskProvider>
