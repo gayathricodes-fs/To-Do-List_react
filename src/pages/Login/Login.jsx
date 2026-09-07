@@ -104,7 +104,7 @@ function Login() {
       // localStorage.setItem("user", btoa(JSON.stringify(users[0])));
 
       // Navigate to Dashboard
-      navigate("/home");
+      navigate("/dashboard");
     } catch (error) {
       console.error(error);
       alert("Unable to login. Please try again.");
