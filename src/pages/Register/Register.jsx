@@ -45,7 +45,7 @@ function Register() {
     try {
       // Check whether email already exists
       const checkResponse = await fetch(
-        `http://localhost:3001/users?email=${formData.email}`
+        `${API_URL}/users?email=${formData.email}`
       );
 
       const existingUsers = await checkResponse.json();
