@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FiCheckSquare, FiUser, FiMail, FiLock } from "react-icons/fi";
 import "./Register.css";
+import API_URL from "../../api/api";
 
 function Register() {
   const navigate = useNavigate();
@@ -55,7 +56,7 @@ function Register() {
       }
 
       // Register user
-      const response = await fetch("http://localhost:3001/users", {
+      const response = await fetch(`${API_URL}/users`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

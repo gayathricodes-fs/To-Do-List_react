@@ -5,6 +5,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { TaskTable } from '../TaskTable/TaskTable.jsx';
 import FilterTask from '../FilterTask/FilterTask.jsx'
 import { useTasks } from '../../context/TaskContext.jsx';
+import API_URL from "../../api/api";
 function Tasks(){
   const { tasks, setTasks } = useTasks();
     const [title, setTitle] = useState("");
@@ -44,7 +45,7 @@ function Tasks(){
 
         if (param === 'active') {
             try {
-                const response = await fetch("http://localhost:3001/tasks")
+                const response = await fetch(`${API_URL}/tasks`)
                 const data = await response.json();
                 const activeTasks = data.filter((task) => !task.completed);
                 setTasks(activeTasks);
@@ -56,7 +57,7 @@ function Tasks(){
 
         if (param === 'completed') {
             try {
-                const response = await fetch("http://localhost:3001/tasks")
+                const response = await fetch(`${API_URL}/tasks`)
                 const data = await response.json();
                 const activeTasks = data.filter((task) => task.completed);
                 setTasks(activeTasks);
@@ -108,7 +109,7 @@ function Tasks(){
     //Fetch Tasks
     const fetchTask = async () => {
         try {
-            const response = await fetch("http://localhost:3001/tasks")
+            const response = await fetch(`${API_URL}/tasks`)
             // if (!response.ok) {
             //     throw new Error("Failed to fetch");
             // }
@@ -184,7 +185,7 @@ function Tasks(){
             if (!editId) {
                 console.log("before", tasks);
 
-                const response = await fetch("http://localhost:3001/tasks", {
+                const response = await fetch(`${API_URL}/tasks`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",

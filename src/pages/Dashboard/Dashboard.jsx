@@ -4,6 +4,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import TaskSummary from '../TaskSummary/TaskSummary.jsx'
 import { useTasks } from "../../context/TaskContext.jsx";
+import API_URL from "../../api/api";
 function Dashboard() {
       const { tasks, setTasks } = useTasks();
      console.log(tasks);
@@ -20,7 +21,7 @@ function Dashboard() {
     //Fetch Tasks
     const fetchTask = async () => {
         try {
-            const response = await fetch("http://localhost:3001/tasks")
+            const response = await fetch(`${API_URL}/tasks`)
             // if (!response.ok) {
             //     throw new Error("Failed to fetch");
             // }
@@ -47,7 +48,7 @@ function Dashboard() {
             completedTasks.map((t) => {
                 console.log(t);
 
-                fetch(`http://localhost:3001/tasks/${t.id}`, {
+                fetch(`${API_URL}/tasks/${t.id}`, {
                     method: "DELETE"
                 })
             }

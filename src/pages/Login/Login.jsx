@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FiCheckSquare, FiMail, FiLock } from "react-icons/fi";
 import "./Login.css";
+import API_URL from "../../api/api";
 
 function Login() {
   const navigate = useNavigate();
@@ -73,7 +74,7 @@ function Login() {
 
     try {
       const response = await fetch(
-        `http://localhost:3001/users`
+        `${API_URL}/users`
       );
 
       const users = await response.json();
