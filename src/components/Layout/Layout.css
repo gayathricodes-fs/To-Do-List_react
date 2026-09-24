@@ -1,12 +1,15 @@
 .app-layout {
+  display: flex;
+  width: 100%;
   min-height: 100vh;
   background: #f8f9fc;
 }
 
 /* Main area beside sidebar */
 .main-area {
-  margin-left: 250px;
-  min-height: 100vh;
+  flex: 1;
+  min-width: 0;
+  width: calc(100% - 250px);
 }
 
 /* Page content */
