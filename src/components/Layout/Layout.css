@@ -1,18 +1,53 @@
 .app-layout {
-  display: flex;
-  width: 100%;
-  min-height: 100vh;
-  background: #f8f9fc;
+    min-height: 100vh;
+    background: #f8f9fc;
+    width: 100%;
+    overflow-x: hidden;
 }
 
 /* Main area beside sidebar */
 .main-area {
-  flex: 1;
-  min-width: 0;
-  width: calc(100% - 250px);
+    margin-left: 250px;
+    min-height: 100vh;
+    width: calc(100% - 250px);
 }
 
 /* Page content */
 .page-content {
-  padding: 25px 30px;
+    padding: 25px 30px;
+    box-sizing: border-box;
+}
+
+
+/* =========================
+   Tablet
+   ========================= */
+
+@media (max-width: 1024px) {
+
+    .main-area {
+        margin-left: 220px;
+        width: calc(100% - 220px);
+    }
+
+    .page-content {
+        padding: 20px;
+    }
+}
+
+
+/* =========================
+   Mobile
+   ========================= */
+
+@media (max-width: 768px) {
+
+    .main-area {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .page-content {
+        padding: 15px;
+    }
 }

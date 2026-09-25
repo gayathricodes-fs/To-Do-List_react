@@ -1,9 +1,5 @@
 import './AddTask.css';
-import React, { useEffect, useState, useRef } from "react";
-import {
-    FiCheckSquare, FiHome, FiList, FiBarChart2, FiInfo, FiUser, FiPlusCircle, FiCalendar, FiChevronDown,
-    FiSquare, FiEdit2, FiTrash2
-} from "react-icons/fi";
+import { FiPlusCircle, FiCalendar} from "react-icons/fi";
 
 function AddTask({ title, setTitle, priority, setPriority, dueDate,
     setDueDate, addTask, error, setError, prioritiesList, dateRef, today, editId, setEditId, validateField }) {

@@ -1,319 +1,455 @@
+/* =========================
+   PAGE TITLE
+========================= */
+
 .home-section {
     margin-top: 30px;
-
-    .title {
-        h2 {
-            font-size: 30px;
-            color: #4F46E5;
-        }
-
-        p {
-            font-size: 15px;
-            position: relative;
-            display: inline-block;
-        }
-
-        p::after {
-            content: "";
-            position: absolute;
-            left: 50%;
-            bottom: -12px;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background-color: #4F46E5;
-            border-radius: 5px;
-        }
-    }
 }
 
-/* .table-section {
-
-
-    margin: 30px 160px 0 160px;
-
-    .add-task-container {
-        width: 100%;
-        background: white;
-        align-content: center;
-        height: 120px;
-        padding: 20px 20px 0 20px;
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-        border-radius: 6px;
-
-    }
-    
-    .row {
-        margin-right: 0;
-    }
-
-    .task_input {
-        position: relative;
-
-        .form-control {
-            font-size: 15px;
-        }
-
-    
-
-    .dropdown {
-        font-size: 16px;
-        font-weight: 500;
-
-        select,
-        option {
-            font-size: 15px;
-            font-size: 15px;
-        }
-
-    }
-
-    .mandate {
-        float: left;
-        font-size: 12px;
-
-        .asterisk {
-            color: red;
-        }
-    }
+.home-section .title h2 {
+    font-size: 30px;
+    color: #4f46e5;
+    margin-bottom: 6px;
 }
 
-    .add-btn {
-        width: 100%;
-        font-size: 14px;
-        font-weight: 500;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 8px;
-    }
+.home-section .title p {
+    font-size: 15px;
+    position: relative;
+    display: inline-block;
+    margin: 0;
+}
 
-    .date-input {
-        position: relative;
+.home-section .title p::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -12px;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background-color: #4f46e5;
+    border-radius: 5px;
+}
 
-        input[type="date"]::-webkit-calendar-picker-indicator {
-            display: none;
-        }
-    }
 
-    .calendar-icon {
-        position: absolute;
-        left: 12px;
-        top: 65%;
-        transform: translateY(-50%);
-        color: #6B7280;
-        font-size: 18px;
-        pointer-events: auto;
-        cursor: pointer;
-    }
+/* =========================
+   ADD TASK SECTION
+========================= */
 
-    .date-input input {
-        padding-left: 40px;
-        font-size: 15px;
-        font-weight: 400;
-        color: #667085;
-
-    }
-
-    .due-date {
-        font-size: 14px;
-        font-weight: 400;
-        color: #667085;
-    }
-
-    .error-msg {
-        display: block;
-        min-height: 18px;
-        font-size: 12px;
-        margin-top: 4px;
-        text-align: start;
-    }
-
-} */
 .add-section {
     margin: 30px;
+}
 
-    .add-task-container {
-        width: 100%;
-        height: 120px;
-        background: #fff;
+.add-task-container {
+    width: 100%;
+    min-height: 120px;
+    background: #fff;
 
-        padding: 30px 20px 0 20px;
+    padding: 30px 20px 0 20px;
 
-        box-sizing: border-box;
+    box-sizing: border-box;
 
-        border-radius: 6px;
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+}
+
+
+/* =========================
+   FORM
+========================= */
+
+.task-form {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        156px
+        156px
+        156px;
+
+    column-gap: 10px;
+
+    align-items: start;
+
+    margin: 0;
+    padding: 0;
+}
+
+
+/* =========================
+   FIELDS
+========================= */
+
+.task_input {
+    width: 100%;
+    min-width: 0;
+    position: relative;
+}
+
+
+/* Labels */
+
+.mandate {
+    height: 15px;
+
+    display: flex;
+    align-items: center;
+
+    margin-bottom: 4px;
+
+    font-size: 12px;
+    font-weight: 400;
+
+    color: #222;
+}
+
+.asterisk {
+    color: red;
+    margin-right: 2px;
+}
+
+
+/* Inputs */
+
+.task_input > .form-control {
+    width: 100%;
+    height: 38px;
+
+    box-sizing: border-box;
+
+    padding: 6px 12px;
+
+    font-size: 15px;
+
+    border: 1px solid #d5dce5;
+    border-radius: 6px;
+
+    color: #344054;
+
+    outline: none;
+}
+
+.task_input > .form-control:focus {
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.1);
+}
+
+
+/* =========================
+   PRIORITY
+========================= */
+
+.priority-field select {
+    width: 100%;
+    height: 38px;
+
+    font-size: 15px;
+
+    padding: 6px 12px;
+
+    color: #344054;
+}
+
+
+/* =========================
+   DATE
+========================= */
+
+.date-input {
+    width: 100%;
+    height: 38px;
+
+    position: relative;
+
+    box-sizing: border-box;
+}
+
+.date-input input[type="date"] {
+    width: 100%;
+    height: 38px;
+
+    box-sizing: border-box;
+
+    padding-left: 40px;
+
+    font-size: 15px;
+    font-weight: 400;
+
+    color: #667085;
+}
+
+.date-input input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+}
+
+
+/* Calendar icon */
+
+.calendar-icon {
+    position: absolute;
+
+    left: 12px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: #6b7280;
+
+    font-size: 18px;
+
+    z-index: 5;
+
+    cursor: pointer;
+}
+
+
+/* =========================
+   ERROR
+========================= */
+
+.error-msg {
+    display: block;
+
+    min-height: 18px;
+
+    margin-top: 3px;
+
+    font-size: 12px;
+    line-height: 16px;
+
+    text-align: left;
+}
+
+
+/* =========================
+   BUTTON
+========================= */
+
+.button-field {
+    padding-top: 19px;
+}
+
+.add-btn {
+    width: 100%;
+    height: 38px;
+
+    padding: 0 10px;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 6px;
+
+    border: none;
+    border-radius: 7px;
+
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.add-btn > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 5px;
+}
+
+.add-icon {
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   LARGE TABLET / SMALL DESKTOP
+========================================================= */
+
+@media (max-width: 1200px) {
+
+    .add-section {
+        margin: 25px 20px;
     }
 
-    /* Main form layout */
     .task-form {
-        width: 100%;
-
-        display: grid;
-
         grid-template-columns:
             minmax(0, 1fr)
-            156px
-            156px
-            156px;
+            145px
+            145px
+            145px;
 
-        column-gap: 10px;
-
-        align-items: start;
-
-        margin: 0;
-        padding: 0;
+        gap: 10px;
     }
 
-    /* All fields */
-    .task_input {
-        width: 100%;
-        min-width: 0;
-        position: relative;
+    .home-section .title h2 {
+        font-size: 28px;
+    }
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1024px) {
+
+    .add-section {
+        margin: 20px;
     }
 
-    /* Labels */
-    .mandate {
-        height: 15px;
+    .add-task-container {
+        height: auto;
+        min-height: 0;
 
-        display: flex;
-        align-items: center;
-
-        margin-bottom: 4px;
-
-        font-size: 12px;
-        font-weight: 400;
-        color: #222;
-
-        .asterisk {
-            color: red;
-            margin-right: 1px;
-        }
+        padding: 22px 20px;
     }
 
-    /* Text input and select */
-    .task_input > .form-control {
-        width: 100%;
-        height: 38px;
+    .task-form {
+        grid-template-columns:
+            minmax(0, 1fr)
+            150px
+            150px;
 
-        box-sizing: border-box;
-
-        padding: 6px 12px;
-
-        font-size: 15px;
-
-        border: 1px solid #d5dce5;
-        border-radius: 6px;
-
-        color: #344054;
+        row-gap: 18px;
     }
 
-    /* Select */
-    .priority-field select {
-        width: 100%;
-        height: 38px;
-
-        font-size: 15px;
-
-        padding: 6px 12px;
-
-        color: #344054;
-    }
-
-    /* Date */
-    .date-input {
-        width: 100%;
-        height: 38px;
-
-        position: relative;
-
-        box-sizing: border-box;
-    }
-
-    .date-input input[type="date"] {
-        width: 100%;
-        height: 38px;
-
-        box-sizing: border-box;
-
-        padding-left: 40px;
-
-        font-size: 15px;
-        font-weight: 400;
-
-        color: #667085;
-    }
-
-    .date-input input[type="date"]::-webkit-calendar-picker-indicator {
-        display: none;
-    }
-
-    /* Calendar */
-    .calendar-icon {
-        position: absolute;
-
-        left: 12px;
-        top: 50%;
-
-        transform: translateY(-50%);
-
-        color: #6b7280;
-
-        font-size: 18px;
-
-        z-index: 5;
-
-        cursor: pointer;
-    }
-
-    /* Error messages */
-    .error-msg {
-        display: block;
-
-        min-height: 18px;
-
-        margin-top: 3px;
-
-        font-size: 12px;
-        line-height: 16px;
-
-        text-align: left;
-    }
-
-    /* Button */
     .button-field {
         padding-top: 19px;
     }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .home-section {
+        margin-top: 20px;
+    }
+
+    .home-section .title h2 {
+        font-size: 24px;
+    }
+
+    .home-section .title p {
+        font-size: 14px;
+    }
+
+    .add-section {
+        margin: 20px 0;
+    }
+
+    .add-task-container {
+        padding: 20px 16px;
+        border-radius: 8px;
+    }
+
+    /*
+       One field per row on mobile
+    */
+
+    .task-form {
+        grid-template-columns: 1fr;
+
+        row-gap: 14px;
+    }
+
+    .task_input {
+        width: 100%;
+    }
+
+    .task_input > .form-control,
+    .priority-field select,
+    .date-input,
+    .date-input input[type="date"] {
+        width: 100%;
+    }
+
+    .button-field {
+        padding-top: 4px;
+    }
 
     .add-btn {
-        width: 100%;
-        height: 38px;
+        height: 42px;
+    }
+}
 
-        padding: 0 10px;
 
-        display: flex;
-        justify-content: center;
-        align-items: center;
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
 
-        gap: 6px;
+@media (max-width: 480px) {
 
-        border: none;
-        border-radius: 7px;
+    .home-section {
+        margin-top: 15px;
+    }
 
+    .home-section .title h2 {
+        font-size: 22px;
+    }
+
+    .home-section .title p {
+        font-size: 13px;
+    }
+
+    .add-section {
+        margin: 15px 0;
+    }
+
+    .add-task-container {
+        padding: 18px 14px;
+    }
+
+    .task-form {
+        row-gap: 12px;
+    }
+
+    .mandate {
+        font-size: 12px;
+    }
+
+    .task_input > .form-control,
+    .priority-field select,
+    .date-input,
+    .date-input input[type="date"] {
+        height: 40px;
+    }
+
+    .add-btn {
+        height: 42px;
         font-size: 14px;
-        font-weight: 500;
+    }
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 360px) {
+
+    .home-section .title h2 {
+        font-size: 20px;
     }
 
-    .add-btn > div {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        gap: 5px;
+    .add-task-container {
+        padding: 16px 12px;
     }
 
-    .add-icon {
-        flex-shrink: 0;
+    .task_input > .form-control,
+    .priority-field select,
+    .date-input input[type="date"] {
+        font-size: 14px;
+    }
+
+    .add-btn {
+        font-size: 13px;
     }
 }

@@ -1,42 +1,396 @@
-  
-  .table-section{
+/* =========================
+   TABLE SECTION
+========================= */
+
+.table-section {
     margin: 30px;
- 
-  .table {
-        background: rgb(199, 10, 10);
-        border-radius: 6px;
-        overflow: hidden;
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2) !important;
+    width: auto;
+}
+
+
+/* =========================
+   TABLE WRAPPER
+========================= */
+
+.table-responsive-wrapper {
+    width: 100%;
+
+    overflow-x: auto;
+
+    border-radius: 6px;
+
+    background: #ffffff;
+
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+
+    -webkit-overflow-scrolling: touch;
+}
+
+
+/* Hide scrollbar visually but keep scrolling */
+
+.table-responsive-wrapper {
+    scrollbar-width: thin;
+}
+
+
+/* =========================
+   TABLE
+========================= */
+
+.task-table {
+    width: 100%;
+
+    min-width: 700px;
+
+    margin: 0;
+
+    background: #ffffff;
+
+    border-radius: 6px;
+
+    overflow: hidden;
+
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+
+/* =========================
+   TABLE ROW
+========================= */
+
+.task-table tr {
+    height: 72px;
+}
+
+.task-table tbody tr {
+    background: #ffffff;
+
+    transition: background-color 0.2s ease;
+}
+
+.task-table tbody tr:hover {
+    background: #fafafa;
+}
+
+
+/* =========================
+   TABLE CELLS
+========================= */
+
+.task-table tbody td {
+    font-size: 14px;
+
+    font-weight: 500;
+
+    color: #101828;
+
+    vertical-align: middle;
+
+    border-bottom: 1px solid #eaecf0;
+
+    padding: 14px 16px;
+}
+
+
+/* Remove bottom border from last row */
+
+.task-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* =========================
+   CHECKBOX
+========================= */
+
+.checkbox-column {
+    width: 60px;
+
+    text-align: center;
+}
+
+.task-checkbox {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+}
+
+
+/* =========================
+   TITLE
+========================= */
+
+.title-column {
+    width: 45%;
+
+    min-width: 250px;
+}
+
+.task-title {
+    display: block;
+
+    width: 100%;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+
+    text-align: left;
+}
+
+.task-title.completed {
+    text-decoration: line-through;
+
+    color: #98a2b3;
+}
+
+
+/* =========================
+   PRIORITY
+========================= */
+
+.priority-column {
+    width: 130px;
+}
+
+.badge {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-width: 85px;
+
+    font-size: 13px;
+
+    font-weight: 500;
+}
+
+
+/* =========================
+   DUE DATE
+========================= */
+
+.due-date {
+    min-width: 150px;
+
+    white-space: nowrap;
+}
+
+.due-date-content {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    color: #667085;
+}
+
+
+/* =========================
+   ACTIONS
+========================= */
+
+.actions-column {
+    width: 110px;
+}
+
+.task-actions {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 18px;
+}
+
+.action-icon {
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
+}
+
+.action-icon:hover {
+    transform: scale(1.1);
+
+    opacity: 0.75;
+}
+
+
+/* =========================
+   NO RECORDS
+========================= */
+
+.no-records {
+    width: 100%;
+
+    min-height: 100px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: #ffffff;
+
+    border-radius: 6px;
+
+    color: #667085;
+
+    font-size: 14px;
+
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+}
+
+
+/* =========================================================
+   LARGE TABLET
+========================================================= */
+
+@media (max-width: 1200px) {
+
+    .table-section {
+        margin: 25px 20px;
     }
 
-    .table thead th {
-        font-size: 14px;
-        font-weight: 600;
-        color: #475467;
+    .task-table {
+        min-width: 680px;
     }
 
-    .table tbody td {
-        font-size: 14px;
-        font-weight: 500;
-        color: #101828;
+    .task-table tbody td {
+        padding: 13px 14px;
+    }
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1024px) {
+
+    .table-section {
+        margin: 20px;
     }
 
-    .table tr {
-        height: 72px;
+    .task-table {
+        min-width: 650px;
     }
 
-    .table td {
-        vertical-align: middle;
+    .task-table tr {
+        height: 68px;
+    }
+
+    .task-table tbody td {
+        font-size: 13px;
+
+        padding: 12px;
     }
 
     .badge {
-        font-size: 14px;
-        font-weight: 500;
-        min-width: 85px;
+        font-size: 12px;
+
+        min-width: 75px;
     }
+}
 
 
-    .table tbody tr:hover {
-        background: #fafafa;
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .table-section {
+        margin: 20px 0;
     }
- }
+
+    /*
+       Keep the table wide enough to remain readable.
+       User can scroll horizontally.
+    */
+
+    .table-responsive-wrapper {
+        border-radius: 8px;
+    }
+
+    .task-table {
+        min-width: 680px;
+    }
+
+    .task-table tr {
+        height: 64px;
+    }
+
+    .task-table tbody td {
+        padding: 12px;
+    }
+
+    .title-column {
+        min-width: 260px;
+    }
+
+    .due-date {
+        min-width: 140px;
+    }
+
+    .actions-column {
+        width: 100px;
+    }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+
+    .table-section {
+        margin: 15px 0;
+    }
+
+    .task-table {
+        min-width: 650px;
+    }
+
+    .task-table tbody td {
+        padding: 10px;
+    }
+
+    .task-title {
+        font-size: 13px;
+    }
+
+    .badge {
+        font-size: 11px;
+
+        min-width: 70px;
+
+        padding: 6px 10px !important;
+    }
+
+    .due-date-content {
+        font-size: 13px;
+    }
+
+    .action-icon {
+        width: 18px;
+        height: 18px;
+    }
+
+    .task-actions {
+        gap: 14px;
+    }
+}

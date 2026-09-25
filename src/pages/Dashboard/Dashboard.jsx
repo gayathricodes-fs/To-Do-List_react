@@ -7,8 +7,6 @@ import { useTasks } from "../../context/TaskContext.jsx";
 import API_URL from "../../api/api";
 function Dashboard() {
       const { tasks, setTasks } = useTasks();
-     console.log(tasks);
-     
     const [totalTasks, setTotalTasks] = useState(0);
     const [completedTasks, setCompletedTasks] = useState(0);
     const [remainingTasks, setRemainingTasks] = useState(0);

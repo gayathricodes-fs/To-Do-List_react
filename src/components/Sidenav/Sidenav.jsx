@@ -7,93 +7,139 @@ import {
   FiUser,
   FiChevronDown
 } from "react-icons/fi";
-import "../Sidenav/Sidenav.css";
+import "./Sidenav.css";
 import { NavLink } from "react-router-dom";
-const SideNav = () => {
- const user = localStorage.getItem("user");
 
-const userDetails = user ? JSON.parse(user) : null;
+const SideNav = ({ isOpen, onClose }) => {
+  const user = localStorage.getItem("user");
 
+  const userDetails = user ? JSON.parse(user) : null;
 
- const menuItems = [
-  { id: 1, label: "Dashboard", icon: <FiHome />, path: "/dashboard" },
-  { id: 2, label: "Tasks", icon: <FiList />, path: "/tasks" },
-  { id: 3, label: "Calendar", icon: <FiCalendar />, path: "/calendar" },
-  { id: 4, label: "Important", icon: <FiStar />, path: "/important" }
-];
+  const menuItems = [
+    {
+      id: 1,
+      label: "Dashboard",
+      icon: <FiHome />,
+      path: "/dashboard"
+    },
+    {
+      id: 2,
+      label: "Tasks",
+      icon: <FiList />,
+      path: "/tasks"
+    },
+    {
+      id: 3,
+      label: "Calendar",
+      icon: <FiCalendar />,
+      path: "/calendar"
+    },
+    {
+      id: 4,
+      label: "Important",
+      icon: <FiStar />,
+      path: "/important"
+    }
+  ];
+
   return (
-   <aside className="side-nav">
+    <>
+      {/* Overlay - only visible when sidebar is open on mobile */}
+      {isOpen && (
+        <div
+          className="sidebar-overlay"
+          onClick={onClose}
+        ></div>
+      )}
 
-  {/* Logo */}
-  <div className="logo-section">
-    <div className="logo-icon">
-      <img
-        src="/logo-update-removebg-preview.png"
-        alt="Logo"
-      />
-    </div>
-  </div>
+      <aside className={`side-nav ${isOpen ? "mobile-open" : ""}`}>
 
-  {/* Scrollable Content */}
-  <div className="side-nav-content">
+        {/* Logo */}
+        <div className="logo-section">
+          <div className="logo-icon">
+            <img
+              src="/logo-update-removebg-preview.png"
+              alt="TaskPilot Logo"
+            />
+          </div>
+        </div>
 
-    {/* Navigation */}
-    <nav className="navigation">
-      {menuItems.map((item) => (
-        <NavLink
-          key={item.id}
-          to={item.path}
-          className={({ isActive }) =>
-        isActive ? "nav-link active" : "nav-link"
-      }
-        >
-          <span className="nav-icon">{item.icon}</span>
-          <span>{item.label}</span>
-        </NavLink>
-      ))}
-    </nav>
 
-    {/* Categories */}
-    <div className="category-section">
+        {/* Scrollable Content */}
+        <div className="side-nav-content">
 
-      <h4>Categories</h4>
+          {/* Navigation */}
+          <nav className="navigation">
 
-      <div className="category-item">
-        <span className="category-dot work"></span>
-        <span>Work</span>
-      </div>
+            {menuItems.map((item) => (
+              <NavLink
+                key={item.id}
+                to={item.path}
+                onClick={onClose}
+                className={({ isActive }) =>
+                  isActive
+                    ? "nav-link active"
+                    : "nav-link"
+                }
+              >
+                <span className="nav-icon">
+                  {item.icon}
+                </span>
 
-      <div className="category-item">
-        <span className="category-dot personal"></span>
-        <span>Personal</span>
-      </div>
+                <span>{item.label}</span>
+              </NavLink>
+            ))}
 
-      <div className="category-item">
-        <span className="category-dot study"></span>
-        <span>Study</span>
-      </div>
+          </nav>
 
-      <div className="category-item">
-        <span className="category-dot shopping"></span>
-        <span>Shopping</span>
-      </div>
-    </div>
-  </div>
 
-  {/* User */}
-  <div className="user-section">
+          {/* Categories */}
+          <div className="category-section">
 
-    <div className="user-icon">
-      <FiUser color="white" />
-    </div>
+            <h4>Categories</h4>
 
-    <span className="user-name">{userDetails?.name || "User"}</span>
+            <div className="category-item">
+              <span className="category-dot work"></span>
+              <span>Work</span>
+            </div>
 
-    <FiChevronDown className="user-arrow" />
+            <div className="category-item">
+              <span className="category-dot personal"></span>
+              <span>Personal</span>
+            </div>
 
-  </div>
+            <div className="category-item">
+              <span className="category-dot study"></span>
+              <span>Study</span>
+            </div>
 
-</aside>
+            <div className="category-item">
+              <span className="category-dot shopping"></span>
+              <span>Shopping</span>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        {/* User */}
+        <div className="user-section">
+
+          <div className="user-icon">
+            <FiUser color="white" />
+          </div>
+
+          <span className="user-name">
+            {userDetails?.name || "User"}
+          </span>
+
+          <FiChevronDown className="user-arrow" />
+
+        </div>
+
+      </aside>
+    </>
   );
 };
 
