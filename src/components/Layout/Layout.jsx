@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 import Sidenav from "../Sidenav/Sidenav";
 import Header from "../Header/Header";
 
-import "..Layout/Layout";
+import "../Layout/Layout";
 
 const Layout = () => {
 
