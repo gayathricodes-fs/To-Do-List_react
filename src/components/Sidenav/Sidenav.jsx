@@ -7,7 +7,7 @@ import {
   FiUser,
   FiChevronDown
 } from "react-icons/fi";
-import "./Sidenav.css";
+import "../Sidenav/Sidenav";
 import { NavLink } from "react-router-dom";
 
 const SideNav = ({ isOpen, onClose }) => {

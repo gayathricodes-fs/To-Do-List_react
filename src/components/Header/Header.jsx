@@ -8,7 +8,7 @@ import {
   FiSettings,
   FiMenu
 } from "react-icons/fi";
-import "./Header.css";
+import "..Header/Header";
 
 import { useNavigate, useLocation } from "react-router-dom";
 
