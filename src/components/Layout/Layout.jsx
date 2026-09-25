@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
 
-import Sidenav from "../Sidenav/Sidenav";
-import Header from "../Header/Header";
+import Sidenav from "../Sidenav/Sidenav.css";
+import Header from "../Header/Header.css";
 
 import "./Layout.css";
 
