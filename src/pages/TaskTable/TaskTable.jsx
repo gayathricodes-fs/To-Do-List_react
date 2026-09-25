@@ -1,115 +1,151 @@
-import React, { useEffect, useState, useRef } from "react";
-import './TaskTable.css';
+import React from "react";
+import "./TaskTable.css";
 import {
-    FiCheckSquare, FiCalendar, FiSquare, FiEdit2, FiTrash2
+    FiCheckSquare,
+    FiCalendar,
+    FiSquare,
+    FiEdit2,
+    FiTrash2
 } from "react-icons/fi";
-export function TaskTable({ filteredData, setDueDate, setTitle, setPriority, setCompleted, setTasks,editTasks,deleteTask,toggleTask }) {
 
-
-    //Delete Tasks
-    
-
+export function TaskTable({
+    filteredData,
+    editTasks,
+    deleteTask,
+    toggleTask
+}) {
     return (
-        <>
-            <section className='table-section'>
-                {filteredData.length > 0 ?
-                    (<table className="table align-middle shadow-sm" >
+        <section className="table-section">
+
+            {filteredData.length > 0 ? (
+                <div className="table-responsive-wrapper">
+
+                    <table className="table task-table align-middle shadow-sm">
 
                         <tbody>
                             {filteredData.map((task) => {
-                               if (!task) return null;
-                               return (
-                                <tr key={task.id}>
 
-                                    {/* Checkbox */}
-                                    <td style={{ width: "60px" }}>
-                                        <span
-                                            style={{ cursor: "pointer" }}
-                                            onClick={() => toggleTask(task.id)}
-                                        >
-                                            {task.completed ? (
-                                                <FiCheckSquare
-                                                    color="#4F46E5"
-                                                    size={24}
-                                                />
-                                            ) : (
-                                                <FiSquare
-                                                    color="#C5C5C5"
-                                                    size={24}
-                                                />
-                                            )}
-                                        </span>
-                                    </td>
+                                if (!task) return null;
 
-                                    {/* Title */}
-                                    <td style={{ width: "45%" }}>
-                                        <span
-                                            style={{
-                                                float: "left",
-                                                textDecoration: task.completed
-                                                    ? "line-through"
-                                                    : "none"
-                                            }}
-                                        >
-                                            {task.title}
-                                        </span>
-                                    </td>
+                                return (
+                                    <tr key={task.id}>
 
-                                    {/* Priority */}
-                                    <td>
-                                        <span
-                                            className={`badge rounded-pill px-3 py-2 ${task.priority === "High"
-                                                ? "text-danger border border-danger bg-white"
-                                                : task.priority === "Medium"
-                                                    ? "text-warning border border-warning bg-white"
-                                                    : "text-success border border-success bg-white"
+                                        {/* Checkbox */}
+                                        <td className="checkbox-column">
+                                            <span
+                                                className="task-checkbox"
+                                                onClick={() => toggleTask(task.id)}
+                                            >
+                                                {task.completed ? (
+                                                    <FiCheckSquare
+                                                        color="#4F46E5"
+                                                        size={24}
+                                                    />
+                                                ) : (
+                                                    <FiSquare
+                                                        color="#C5C5C5"
+                                                        size={24}
+                                                    />
+                                                )}
+                                            </span>
+                                        </td>
+
+
+                                        {/* Title */}
+                                        <td className="title-column">
+                                            <span
+                                                className={
+                                                    task.completed
+                                                        ? "task-title completed"
+                                                        : "task-title"
+                                                }
+                                            >
+                                                {task.title}
+                                            </span>
+                                        </td>
+
+
+                                        {/* Priority */}
+                                        <td className="priority-column">
+
+                                            <span
+                                                className={`badge rounded-pill px-3 py-2 ${
+                                                    task.priority === "High"
+                                                        ? "text-danger border border-danger bg-white"
+                                                        : task.priority === "Medium"
+                                                            ? "text-warning border border-warning bg-white"
+                                                            : "text-success border border-success bg-white"
                                                 }`}
-                                        >
-                                            {task.priority}
-                                        </span>
-                                    </td>
+                                            >
+                                                {task.priority}
+                                            </span>
 
-                                    {/* Due Date */}
-                                    <td className="due-date">
-                                        <FiCalendar
-                                            color="#667085"
-                                            size={18}
-                                            className="me-2"
-                                        />
-                                        {task.dueDate}
-                                    </td>
+                                        </td>
 
-                                    {/* Actions */}
-                                    <td>
 
-                                        <FiEdit2
-                                            color="#4F46E5"
-                                            size={20}
-                                            className="me-4"
-                                            style={{ cursor: "pointer" }}
-                                            onClick={() => editTasks(task.id)}
-                                        />
+                                        {/* Due Date */}
+                                        <td className="due-date">
 
-                                        <FiTrash2
-                                            color="red"
-                                            size={20}
-                                            style={{ cursor: "pointer" }}
-                                            onClick={() => deleteTask(task.id)}
-                                        />
+                                            <div className="due-date-content">
 
-                                    </td>
+                                                <FiCalendar
+                                                    color="#667085"
+                                                    size={18}
+                                                />
 
-                                </tr>
-                               )
-                                
-})}
+                                                <span>
+                                                    {task.dueDate}
+                                                </span>
+
+                                            </div>
+
+                                        </td>
+
+
+                                        {/* Actions */}
+                                        <td className="actions-column">
+
+                                            <div className="task-actions">
+
+                                                <FiEdit2
+                                                    color="#4F46E5"
+                                                    size={20}
+                                                    className="action-icon"
+                                                    onClick={() =>
+                                                        editTasks(task.id)
+                                                    }
+                                                />
+
+                                                <FiTrash2
+                                                    color="#dc2626"
+                                                    size={20}
+                                                    className="action-icon"
+                                                    onClick={() =>
+                                                        deleteTask(task.id)
+                                                    }
+                                                />
+
+                                            </div>
+
+                                        </td>
+
+                                    </tr>
+                                );
+                            })}
                         </tbody>
-                    </table>) :
-                    <div>No Records Found</div>
-                }
 
+                    </table>
 
-            </section>
-        </>
-    )
+                </div>
+
+            ) : (
+
+                <div className="no-records">
+                    No Records Found
+                </div>
+
+            )}
+
+        </section>
+    );
 }

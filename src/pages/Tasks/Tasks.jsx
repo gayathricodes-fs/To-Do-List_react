@@ -139,7 +139,7 @@ function Tasks(){
             completed: !task.completed
         }
 
-        const response = await fetch(`http://localhost:3001/tasks/${d}`, {
+        const response = await fetch(`${API_URL}/tasks/${d}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
@@ -228,7 +228,7 @@ function Tasks(){
     const editTasks = async (id) => {
 
         try {
-            const response = await fetch(`http://localhost:3001/tasks/${id}`)
+            const response = await fetch(`${API_URL}//tasks/${id}`)
             if (!response.ok) {
                 throw new Error("Failed to fetch");
             }
@@ -254,7 +254,7 @@ function Tasks(){
     // delete tasks
     const deleteTask = async (id) => {
         try {
-            await fetch(`http://localhost:3001/tasks/${id}`, {
+            await fetch(`${API_URL}//tasks/${id}`, {
                 method: "DELETE"
             }
             )

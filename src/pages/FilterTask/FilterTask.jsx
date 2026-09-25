@@ -1,54 +1,63 @@
-import './FilterTask.css';
+import "./FilterTask.css";
 import { FiSearch } from "react-icons/fi";
-function FilterTask({activeFilter,setActiveFilterTask,setSearchTerm,searchTerm,setActiveFilter}) {
+
+function FilterTask({
+    activeFilter,
+    setActiveFilterTask,
+    setSearchTerm,
+    searchTerm
+}) {
     return (
-        <>
-            <section className="filter-section">
-                <div className="filter-task-container ">
-                   <div className="filter-buttons">
+        <section className="filter-section">
+            <div className="filter-task-container">
 
-      <button
-        className={activeFilter === "all" ? "active" : ""}
-        onClick={() => setActiveFilterTask("all")}
-      >
-        All
-      </button>
+                <div className="filter-buttons">
 
-      <button
-        className={activeFilter === "active" ? "active" : ""}
-        onClick={() => setActiveFilterTask("active")}
-      >
-        Active
-      </button>
+                    <button
+                        type="button"
+                        className={activeFilter === "all" ? "active" : ""}
+                        onClick={() => setActiveFilterTask("all")}
+                    >
+                        All
+                    </button>
 
-      <button
-        className={activeFilter === "completed" ? "active" : ""}
-        onClick={() => setActiveFilterTask("completed")}
-      >
-        Completed
-      </button>
+                    <button
+                        type="button"
+                        className={activeFilter === "active" ? "active" : ""}
+                        onClick={() => setActiveFilterTask("active")}
+                    >
+                        Active
+                    </button>
 
-    </div>
-                    
-                    
+                    <button
+                        type="button"
+                        className={activeFilter === "completed" ? "active" : ""}
+                        onClick={() => setActiveFilterTask("completed")}
+                    >
+                        Completed
+                    </button>
 
-                    <div className="search-container">
-
-        <FiSearch className="search-icon" />
-
-        <input
-          type="text"
-          className='searchbar'
-           placeholder='Search tasks' 
-          value={searchTerm}
-          onChange={(event)=>setSearchTerm(event.target.value)}
-        />
-
-      </div>
-                    
                 </div>
-            </section>
-        </>
-    )
+
+                <div className="search-container">
+
+                    <FiSearch className="search-icon" />
+
+                    <input
+                        type="text"
+                        className="searchbar"
+                        placeholder="Search tasks"
+                        value={searchTerm}
+                        onChange={(event) =>
+                            setSearchTerm(event.target.value)
+                        }
+                    />
+
+                </div>
+
+            </div>
+        </section>
+    );
 }
-export default FilterTask
+
+export default FilterTask;
