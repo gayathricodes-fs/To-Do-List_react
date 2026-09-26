@@ -1,5 +1,5 @@
 import './TaskSummary.css';
-import { FiCheckSquare, FiHome, FiList, FiBarChart2, FiInfo, FiUser, FiCheck, FiClock, FiTrash2 } from "react-icons/fi";
+import {  FiList, FiCheck, FiClock, FiTrash2 } from "react-icons/fi";
 
 function TaskSummary({totalTasks,completedTasks,remainingTasks,clearCompleted}) {
     return (
