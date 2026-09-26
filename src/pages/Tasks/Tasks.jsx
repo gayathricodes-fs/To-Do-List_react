@@ -37,8 +37,7 @@ function Tasks(){
 
     //Filter task
    const  setActiveFilterTask = async (param) => {
-    console.log(param);
-     setActiveFilter(activeFilter)
+     setActiveFilter(param)
         if (param === 'all') {
             fetchTask();
         }
@@ -170,7 +169,6 @@ function Tasks(){
         }
 
         let obj = {
-            id: tasks.length + 1,
             title,
             priority,
             dueDate: new Date(dueDate).toLocaleDateString("en-Us", {
@@ -183,8 +181,6 @@ function Tasks(){
 
         try {
             if (!editId) {
-                console.log("before", tasks);
-
                 const response = await fetch(`${API_URL}/tasks`, {
                     method: "POST",
                     headers: {
@@ -202,7 +198,7 @@ function Tasks(){
                 fetchTask()
             }
             else {
-                const response = await fetch(`http://localhost:3001/tasks/${editId}`, {
+                const response = await fetch(`${API_URL}/tasks/${editId}`, {
                     method: "PATCH",
                     headers: {
                         "Content-Type": "application/json",
@@ -228,7 +224,7 @@ function Tasks(){
     const editTasks = async (id) => {
 
         try {
-            const response = await fetch(`${API_URL}//tasks/${id}`)
+            const response = await fetch(`${API_URL}/tasks/${id}`)
             if (!response.ok) {
                 throw new Error("Failed to fetch");
             }
@@ -254,7 +250,7 @@ function Tasks(){
     // delete tasks
     const deleteTask = async (id) => {
         try {
-            await fetch(`${API_URL}//tasks/${id}`, {
+            await fetch(`${API_URL}/tasks/${id}`, {
                 method: "DELETE"
             }
             )
