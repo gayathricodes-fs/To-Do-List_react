@@ -17,30 +17,36 @@ function Dashboard() {
 
 
     //Fetch Tasks
-    const fetchTask = async () => {
-        try {
-            const response = await fetch(`${API_URL}/tasks`)
-            // if (!response.ok) {
-            //     throw new Error("Failed to fetch");
-            // }
+   const fetchTask = async () => {
+    try {
+        const response = await fetch(`${API_URL}/tasks`);
 
-            const data = await response.json();
-            const total = data.length;
-            const completedLength = data.filter((task) => task.completed).length;
-            const remainingLength = total - completedLength;
-            setTotalTasks(total);
-            setCompletedTasks(completedLength);
-            setRemainingTasks(remainingLength)
-
-            setTasks(data);
-        } catch (error) {
-            console.error(error);
-            tasks([]); // Prevent crashes
+        if (!response.ok) {
+            throw new Error("Failed to fetch tasks");
         }
+
+        const data = await response.json();
+
+        const total = data.length;
+        const completedLength = data.filter(
+            (task) => task.completed
+        ).length;
+
+        const remainingLength = total - completedLength;
+
+        setTotalTasks(total);
+        setCompletedTasks(completedLength);
+        setRemainingTasks(remainingLength);
+        setTasks(data);
+
+    } catch (error) {
+        console.error("FETCH ERROR:", error);
+        setTasks([]);
     }
+};
 
 
-   const clearCompleted = async () => {
+ const clearCompleted = async () => {
 
     const completedTasksList = tasks.filter(
         (task) => task.completed
@@ -48,31 +54,31 @@ function Dashboard() {
 
     try {
         await Promise.all(
-            completedTasksList.map((task) =>
-                fetch(`${API_URL}/tasks/${task.id}`, {
-                    method: "DELETE",
-                })
-            )
+            completedTasksList.map(async (task) => {
+                const response = await fetch(
+                    `${API_URL}/tasks/${task._id}`,
+                    {
+                        method: "DELETE",
+                    }
+                );
+
+                if (!response.ok) {
+                    throw new Error(`Failed to delete task ${task._id}`);
+                }
+            })
         );
 
-        // Create the updated task list FIRST
         const updatedTasks = tasks.filter(
             (task) => !task.completed
         );
 
-        // Update TaskContext
         setTasks(updatedTasks);
 
-        // Update summary using updatedTasks
         const total = updatedTasks.length;
-
         const completed = updatedTasks.filter(
             (task) => task.completed
         ).length;
-
-        const remaining = updatedTasks.filter(
-            (task) => !task.completed
-        ).length;
+        const remaining = total - completed;
 
         setTotalTasks(total);
         setCompletedTasks(completed);
@@ -80,6 +86,9 @@ function Dashboard() {
 
     } catch (error) {
         console.error("DELETE ERROR:", error);
+
+        // Refresh from backend if a deletion fails
+        fetchTask();
     }
 };
 
