@@ -8,7 +8,7 @@ function AddTask({ title, setTitle, priority, setPriority, dueDate,
         <>
             <section className="home-section">
                 <div className="title">
-                    <h2>My To Do List</h2>
+                    <h2>My To Do List Add</h2>
                     <p>Stay organized. Get things done.</p>
                 </div>
             </section>
