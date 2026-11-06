@@ -56,7 +56,7 @@ function Dashboard() {
         await Promise.all(
             completedTasksList.map(async (task) => {
                 const response = await fetch(
-                    `${API_URL}/tasks/${task.id}`,
+                    `${API_URL}/tasks/${task._id}`,
                     {
                         method: "DELETE",
                     }
