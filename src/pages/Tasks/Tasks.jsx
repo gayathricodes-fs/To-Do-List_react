@@ -30,43 +30,41 @@ function Tasks(){
         dueDate: "",
         priority: ""
     });
+      useEffect(() => {
+        fetchTask()
+    }, [])
+
+
 
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState("");
     const [activeFilter, setActiveFilter] = useState("all")
 
     //Filter task
-   const  setActiveFilterTask = async (param) => {
-     setActiveFilter(param)
-        if (param === 'all') {
-            fetchTask();
+   const setActiveFilterTask = async (param) => {
+    setActiveFilter(param);
+
+    try {
+        const response = await fetch(`${API_URL}/tasks`);
+
+        if (!response.ok) {
+            throw new Error("Failed to fetch tasks");
         }
 
-        if (param === 'active') {
-            try {
-                const response = await fetch(`${API_URL}/tasks`)
-                const data = await response.json();
-                const activeTasks = data.filter((task) => !task.completed);
-                setTasks(activeTasks);
-            } catch (error) {
-                console.error(error);
-                setTasks([]); // Prevent crashes
-            }
-        }
+        const data = await response.json();
 
-        if (param === 'completed') {
-            try {
-                const response = await fetch(`${API_URL}/tasks`)
-                const data = await response.json();
-                const activeTasks = data.filter((task) => task.completed);
-                setTasks(activeTasks);
-            } catch (error) {
-                console.error(error);
-                setTasks([]); // Prevent crashes
-            }
+        if (param === "active") {
+            setTasks(data.filter((task) => !task.completed));
+        } else if (param === "completed") {
+            setTasks(data.filter((task) => task.completed));
+        } else {
+            setTasks(data);
         }
-       
+    } catch (error) {
+        console.error("FILTER ERROR:", error);
+        setTasks([]);
     }
+};
 
 
     //search Tasks
@@ -100,170 +98,192 @@ function Tasks(){
     };
 
 
-    useEffect(() => {
-        fetchTask()
-    }, [])
-
-
+  
     //Fetch Tasks
     const fetchTask = async () => {
-        try {
-            const response = await fetch(`${API_URL}/tasks`)
-            // if (!response.ok) {
-            //     throw new Error("Failed to fetch");
-            // }
-
-            const data = await response.json();
-            const total = data.length;
-            const completedLength = data.filter((task) => task.completed).length;
-            const remainingLength = total - completedLength;
-            setTotalTasks(total);
-            setCompletedTasks(completedLength);
-            setRemainingTasks(remainingLength)
-
-            setTasks(data);
-        } catch (error) {
-            console.error(error);
-            setTasks([]); // Prevent crashes
+    try {
+        const response = await fetch(`${API_URL}/tasks`);
+        console.log(response);
+        
+        if (!response.ok) {
+            throw new Error("Failed to fetch tasks");
         }
+
+        const data = await response.json();
+
+        setTotalTasks(data.length);
+        setCompletedTasks(data.filter(task => task.completed).length);
+        setRemainingTasks(data.filter(task => !task.completed).length);
+
+        setTasks(data);
+    } catch (error) {
+        console.error("FETCH ERROR:", error);
+        setTasks([]);
     }
+};
 
     //Toggle Function
-    const toggleTask = async (d) => {
-        const task = tasks.find((t) => d === t.id)
-        if (!task) return
+    const toggleTask = async (id) => {
+    const task = tasks.find((t) => t._id === id);
+    if (!task) return;
 
-        const updatedTask = {
-            ...task,
-            completed: !task.completed
-        }
-
-        const response = await fetch(`${API_URL}/tasks/${d}`, {
-            method: "PATCH",
+    try {
+        const response = await fetch(`${API_URL}/tasks/${id}`, {
+            method: "PUT",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ completed: updatedTask.completed }),
+            body: JSON.stringify({
+                completed: !task.completed,
+            }),
+        });
+
+        if (!response.ok) {
+            throw new Error("Failed to update task");
         }
 
-        )
-        setTasks(prevTasks =>
-            prevTasks.map(t =>
-                t.id === d ? updatedTask : t
+        const updatedTask = await response.json();
+
+        setTasks((prevTasks) =>
+            prevTasks.map((t) =>
+                t._id === id ? updatedTask : t
             )
         );
-        fetchTask()
+
+        fetchTask();
+    } catch (error) {
+        console.error("TOGGLE ERROR:", error);
     }
+};
 
 
 
     //Add Tasks 
     const addTask = async () => {
-        validateField("title", title);
-        validateField("dueDate", dueDate);
-        validateField("priority", priority);
+    validateField("title", title);
+    validateField("dueDate", dueDate);
+    validateField("priority", priority);
 
-
-        if (title.trim() === "" || dueDate === "" || priority === "Select") {
-            return;
-        }
-
-        let obj = {
-            title,
-            priority,
-            dueDate: new Date(dueDate).toLocaleDateString("en-Us", {
-                month: 'short',
-                day: 'numeric',
-                year: 'numeric'
-            }),
-            completed: false,
-        }
-
-        try {
-            if (!editId) {
-                const response = await fetch(`${API_URL}/tasks`, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(obj),
-                }
-                )
-                const data = await response.json()
-
-                setTasks((previousTasks) => [data, ...previousTasks])
-                setTitle("");
-                setDueDate("");
-                setPriority("Select")
-                fetchTask()
-            }
-            else {
-                const response = await fetch(`${API_URL}/tasks/${editId}`, {
-                    method: "PATCH",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(obj),
-                }
-                )
-                fetchTask();
-                setEditId(null);
-                setTitle("");
-                setDueDate("");
-                setPriority("Select")
-            }
-        } catch (error) {
-            console.log(error)
-        }
-
-
+    if (
+        title.trim() === "" ||
+        dueDate === "" ||
+        priority === "Select"
+    ) {
+        return;
     }
+
+    const obj = {
+        title,
+        priority,
+        dueDate: new Date(dueDate).toLocaleDateString("en-US", {
+            month: "short",
+            day: "numeric",
+            year: "numeric",
+        }),
+        completed: false,
+    };
+
+    try {
+        if (!editId) {
+            const response = await fetch(`${API_URL}/tasks`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(obj),
+            });
+
+            if (!response.ok) {
+                throw new Error("Failed to create task");
+            }
+
+            const data = await response.json();
+            setTasks((previousTasks) => [data, ...previousTasks]);
+        } else {
+            const response = await fetch(`${API_URL}/tasks/${editId}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(obj),
+            });
+
+            if (!response.ok) {
+                throw new Error("Failed to update task");
+            }
+        }
+
+        setTitle("");
+        setDueDate("");
+        setPriority("Select");
+        setEditId(null);
+
+        await fetchTask();
+
+    } catch (error) {
+        console.error("SAVE TASK ERROR:", error);
+    }
+};
 
     //Edit tasks 
 
     const editTasks = async (id) => {
+    try {
+        const response = await fetch(`${API_URL}/tasks/${id}`);
 
-        try {
-            const response = await fetch(`${API_URL}/tasks/${id}`)
-            if (!response.ok) {
-                throw new Error("Failed to fetch");
-            }
-
-            const data = await response.json();
-            setPriority(data.priority)
-            setTitle(data.title)
-            setCompleted(data.completed)
-            const formattedDate = new Date(data.dueDate).toLocaleDateString("en-CA");
-            setDueDate(formattedDate)
-            setEditId(data.id)
-            validateField("title", data.title);
-            validateField("dueDate", data.dueDate);
-            validateField("priority", data.priority);
-
-
-        } catch (error) {
-            console.error(error);
-            setTasks([]); // Prevent crashes
+        if (!response.ok) {
+            throw new Error("Failed to fetch task");
         }
+
+        const data = await response.json();
+
+        setPriority(data.priority);
+        setTitle(data.title);
+        setCompleted(data.completed);
+
+        const formattedDate = new Date(data.dueDate)
+            .toISOString()
+            .slice(0, 10);
+       
+        
+        setDueDate(formattedDate);
+        setEditId(data._id);
+
+        validateField("title", data.title);
+        validateField("dueDate", formattedDate);
+        validateField("priority", data.priority);
+
+    } catch (error) {
+        console.error("EDIT ERROR:", error);
     }
+};
 
     // delete tasks
-    const deleteTask = async (id) => {
-        try {
-            await fetch(`${API_URL}/tasks/${id}`, {
-                method: "DELETE"
-            }
-            )
-            setTasks((previousTasks) => previousTasks.filter((tasks) => tasks.id !== id));
-            setTitle("");
-            setDueDate("");
-            setPriority("Select")
-            fetchTask()
-            setEditId(null);
-        } catch (error) {
-            console.log(error)
+  const deleteTask = async (id) => {
+    try {
+        const response = await fetch(`${API_URL}/tasks/${id}`, {
+            method: "DELETE",
+        });
+
+        if (!response.ok) {
+            throw new Error("Failed to delete task");
         }
+
+        setTasks((previousTasks) =>
+            previousTasks.filter((task) => task._id !== id)
+        );
+
+        setTitle("");
+        setDueDate("");
+        setPriority("Select");
+        setEditId(null);
+
+        await fetchTask();
+
+    } catch (error) {
+        console.error("DELETE ERROR:", error);
     }
+};
 
    
 

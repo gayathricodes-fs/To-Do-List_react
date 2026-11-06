@@ -28,13 +28,13 @@ export function TaskTable({
                                 if (!task) return null;
 
                                 return (
-                                    <tr key={task.id}>
+                                    <tr key={task._id}>
 
                                         {/* Checkbox */}
                                         <td className="checkbox-column">
                                             <span
                                                 className="task-checkbox"
-                                                onClick={() => toggleTask(task.id)}
+                                                onClick={() => toggleTask(task._id)}
                                             >
                                                 {task.completed ? (
                                                     <FiCheckSquare
@@ -112,7 +112,7 @@ export function TaskTable({
                                                     size={20}
                                                     className="action-icon"
                                                     onClick={() =>
-                                                        editTasks(task.id)
+                                                        editTasks(task._id)
                                                     }
                                                 />
 
@@ -121,7 +121,7 @@ export function TaskTable({
                                                     size={20}
                                                     className="action-icon"
                                                     onClick={() =>
-                                                        deleteTask(task.id)
+                                                        deleteTask(task._id)
                                                     }
                                                 />
 
